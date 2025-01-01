@@ -4,4 +4,6 @@ scikit-learn
 matplotlib
 implicit
 streamlit
-azure
+azure-storage-blob
+azure-keyvault-secrets
+azure-mgmt-resource
