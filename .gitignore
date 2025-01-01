@@ -28,7 +28,6 @@ p9-recommendation-function/bin/
 p9-recommendation-function/obj/
 p9-recommendation-function/.vscode/
 p9-recommendation-function/extensions.csproj
-p9-recommendation-function/requirements.txt
 
 p9-recommendation-function/MyFunction/__pycache__/
 p9-recommendation-function/MyFunction/_local/
