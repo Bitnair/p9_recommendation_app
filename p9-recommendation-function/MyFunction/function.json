@@ -1,0 +1,52 @@
+{
+  "scriptFile": "__init__.py",
+  "bindings": [
+    {
+      "type": "httpTrigger",
+      "direction": "in",
+      "name": "req",
+      "authLevel": "anonymous",
+      "methods": [ "get", "post" ]
+    },
+    {
+      "type": "blob",
+      "direction": "in",
+      "name": "userFactors",
+      "path": "trained-model/user_factors.npy",
+      "connection": "AzureWebJobsStorage"
+    },
+    {
+      "type": "blob",
+      "direction": "in",
+      "name": "itemFactors",
+      "path": "trained-model/item_factors.npy",
+      "connection": "AzureWebJobsStorage"
+    },
+    {
+      "type": "blob",
+      "direction": "in",
+      "name": "interactionMatrix",
+      "path": "trained-model/interaction_matrix.npz",
+      "connection": "AzureWebJobsStorage"
+    },
+    {
+      "type": "blob",
+      "direction": "in",
+      "name": "userIdMap",
+      "path": "trained-model/user_id_map.pkl",
+      "connection": "AzureWebJobsStorage"
+    },
+    {
+      "type": "blob",
+      "direction": "in",
+      "name": "itemIdMap",
+      "path": "trained-model/item_id_map.pkl",
+      "connection": "AzureWebJobsStorage"
+    },
+    {
+      "type": "http",
+      "direction": "out",
+      "name": "$return"
+    }
+  ]
+}
