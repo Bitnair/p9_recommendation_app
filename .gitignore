@@ -1,6 +1,11 @@
-# Python virtual environment
+# .gitignore
+
+# Python virtual environments
 .venv/
 venv/
+myfuncenv/
+p9-recommendation-function/myfuncenv/
+p9-recommendation-function/venv/
 
 # Jupyter Notebook checkpoints
 .ipynb_checkpoints/
@@ -8,24 +13,19 @@ venv/
 # Sensitive information
 env/
 .env
-
-.env
 credentials.env
 
+# macOS specific
 .DS_Store
 
-# Folders
+# Build directories
 _archives/
 __pycache__/
 data/
-myfuncenv/
-.vscode/
 p9-recommendation-function/__pycache__/
 p9-recommendation-function/_local/
 p9-recommendation-function/bin/
-p9-recommendation-function/myfuncenv/
 p9-recommendation-function/obj/
-p9-recommendation-function/venv/
 p9-recommendation-function/.vscode/
 p9-recommendation-function/extensions.csproj
 p9-recommendation-function/requirements.txt
@@ -33,3 +33,6 @@ p9-recommendation-function/requirements.txt
 p9-recommendation-function/MyFunction/__pycache__/
 p9-recommendation-function/MyFunction/_local/
 p9-recommendation-function/MyFunction/local_data/
+
+# Exclude all .vscode/ directories
+.vscode/
