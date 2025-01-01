@@ -19,6 +19,7 @@ _archives/
 __pycache__/
 data/
 myfuncenv/
+.vscode/
 p9-recommendation-function/__pycache__/
 p9-recommendation-function/_local/
 p9-recommendation-function/bin/
@@ -32,4 +33,3 @@ p9-recommendation-function/requirements.txt
 p9-recommendation-function/MyFunction/__pycache__/
 p9-recommendation-function/MyFunction/_local/
 p9-recommendation-function/MyFunction/local_data/
-
