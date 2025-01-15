@@ -8,7 +8,7 @@ on:
 
 env:
   # This points to the folder that contains the function app files:
-  AZURE_FUNCTIONAPP_PACKAGE_PATH: 'azure/p9-recommendation-function'
+  AZURE_FUNCTIONAPP_PACKAGE_PATH: 'p9-recommendation-function'
   PYTHON_VERSION: '3.11'
 
 jobs:
