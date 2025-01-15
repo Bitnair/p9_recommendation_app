@@ -32,14 +32,15 @@ jobs:
 
       - name: Zip Function App Package
         run: |
+          mkdir -p ${{ github.workspace }}/artifact
           cd ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
-          zip -r ../../release_function.zip ./*
+          zip -r ${{ github.workspace }}/artifact/release_function.zip ./*
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: function-app-package
-          path: release_function.zip
+          path: ${{ github.workspace }}/artifact/release_function.zip
 
   deploy:
     runs-on: ubuntu-latest
