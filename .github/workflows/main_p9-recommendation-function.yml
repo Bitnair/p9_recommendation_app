@@ -7,7 +7,8 @@ on:
   workflow_dispatch:
 
 env:
-  AZURE_FUNCTIONAPP_PACKAGE_PATH: '.' # path for the azure function project, defaults to the repository root
+  # This points to the folder that contains the function app files:
+  AZURE_FUNCTIONAPP_PACKAGE_PATH: 'azure/p9-recommendation-function'
   PYTHON_VERSION: '3.11'
 
 jobs:
@@ -22,53 +23,46 @@ jobs:
         with:
           python-version: ${{ env.PYTHON_VERSION }}
 
-      - name: Create and start virtual environment
+      - name: Create virtual environment and install dependencies
         run: |
+          cd ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
           python -m venv venv
           source venv/bin/activate
+          pip install -r requirements.txt
 
-      - name: Install dependencies
-        run: pip install -r p9-recommendation-function/requirements.txt
+      - name: Zip Function App Package
+        run: |
+          cd ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
+          zip -r ../../release_function.zip ./*
 
-      - name: Zip artifact for deployment
-        run: zip release.zip ./* -r
-
-      - name: Upload artifact for deployment job
+      - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: python-app
-          path: |
-            release.zip
-            !venv/
+          name: function-app-package
+          path: release_function.zip
 
   deploy:
     runs-on: ubuntu-latest
     needs: build
-    
     permissions:
       id-token: write
-
+      contents: read
     steps:
-      - name: Download artifact from build job
+      - name: Download artifact
         uses: actions/download-artifact@v4
         with:
-          name: python-app
+          name: function-app-package
 
-      - name: Unzip artifact for deployment
-        run: unzip release.zip     
-        
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_146BC0E1F38D4856BA5CA22981629B3A }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_27412AE267F646CCB395D342DAAE5DFA }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_006B9ACEDD794740ABEA5B433AEB6ABE }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID }}
 
-      - name: 'Deploy to Azure Functions'
+      - name: Deploy to Azure Functions
         uses: Azure/functions-action@v1
-        id: deploy-to-function
         with:
-          app-name: 'p9-recommendation-function'
+          app-name: 'p9-recommendation-function'   # function app name in Azure
           slot-name: 'Production'
-          package: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
-          
+          package: release_function.zip
