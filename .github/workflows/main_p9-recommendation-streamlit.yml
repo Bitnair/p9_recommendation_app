@@ -20,6 +20,7 @@ jobs:
 
       - name: Install dependencies
         run: |
+          cd streamlit-app
           python -m venv venv
           source venv/bin/activate
           pip install --upgrade pip
@@ -27,6 +28,7 @@ jobs:
 
       - name: Validate Streamlit App
         run: |
+          cd streamlit-app
           source venv/bin/activate
           streamlit run streamlit_app.py --server.headless=true --server.port=8501 --server.address=127.0.0.1 &
           sleep 10  # Wait for Streamlit to start
@@ -34,7 +36,7 @@ jobs:
 
       - name: Zip application
         run: |
-          zip -r app.zip .
+          zip -r app.zip streamlit-app
 
       - name: Azure Login
         uses: azure/login@v1
