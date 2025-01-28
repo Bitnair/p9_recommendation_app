@@ -1,4 +1,4 @@
-name: Build and deploy Python project to Azure Function App - p9-recommendation-function
+name: Build and deploy Azure Function - p9-recommendation-function
 
 on:
   push:
@@ -7,7 +7,6 @@ on:
   workflow_dispatch:
 
 env:
-  # This points to the folder that contains the function app files:
   AZURE_FUNCTIONAPP_PACKAGE_PATH: 'p9-recommendation-function'
   PYTHON_VERSION: '3.11'
 
@@ -28,7 +27,6 @@ jobs:
           cd ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
           python -m venv venv
           source venv/bin/activate
-          pip install --upgrade pip
           pip install -r requirements.txt
 
       - name: Zip Function App Package
@@ -65,6 +63,6 @@ jobs:
       - name: Deploy to Azure Functions
         uses: Azure/functions-action@v1
         with:
-          app-name: 'p9-recommendation-function'   # function app name in Azure
+          app-name: 'p9-recommendation-function'
           slot-name: 'Production'
           package: release_function.zip
