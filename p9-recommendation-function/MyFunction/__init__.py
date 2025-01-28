@@ -72,7 +72,9 @@ def main(req: func.HttpRequest, userFactors: func.InputStream,
 
         # Step 4: Generate Recommendations
         user_vector = userFactors[user_idx]
+        logging.info(f"User vector: {user_vector[:5]}")
         scores = user_vector.dot(itemFactors.T)
+        logging.info(f"Scores shape: {scores.shape}")
         liked_items = interactionMatrix[user_idx].indices
         scores[liked_items] = -np.inf  # Exclude already liked items
 
