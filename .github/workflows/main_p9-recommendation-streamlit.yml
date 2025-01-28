@@ -1,4 +1,4 @@
-name: Deploy Streamlit App to Azure Web App
+name: Build and deploy Streamlit App to Azure Web App
 
 on:
   push:
