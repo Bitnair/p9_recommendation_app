@@ -21,6 +21,7 @@ project.lock.json
 .secrets
 appsettings.json
 local.settings.json
+p9-recommendation-function/function_app.py
 
 node_modules
 dist
