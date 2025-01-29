@@ -1,3 +1,4 @@
+# '__init__.py' script: entry point for the Azure Function App.
 """
 Returns predictions as a list of recommended item IDs for a given user ID.
 """
