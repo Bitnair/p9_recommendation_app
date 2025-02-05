@@ -13,35 +13,40 @@
       "direction": "in",
       "name": "userFactors",
       "path": "trained-model/user_factors.npy",
-      "connection": "AzureWebJobsStorage"
+      "connection": "AzureWebJobsStorage",
+      "dataType": "binary"
     },
     {
       "type": "blob",
       "direction": "in",
       "name": "itemFactors",
       "path": "trained-model/item_factors.npy",
-      "connection": "AzureWebJobsStorage"
+      "connection": "AzureWebJobsStorage",
+      "dataType": "binary"
     },
     {
       "type": "blob",
       "direction": "in",
       "name": "interactionMatrix",
       "path": "trained-model/interaction_matrix.npz",
-      "connection": "AzureWebJobsStorage"
+      "connection": "AzureWebJobsStorage",
+      "dataType": "binary"
     },
     {
       "type": "blob",
       "direction": "in",
       "name": "userIdMap",
       "path": "trained-model/user_id_map.pkl",
-      "connection": "AzureWebJobsStorage"
+      "connection": "AzureWebJobsStorage",
+      "dataType": "binary"
     },
     {
       "type": "blob",
       "direction": "in",
       "name": "itemIdMap",
       "path": "trained-model/item_id_map.pkl",
-      "connection": "AzureWebJobsStorage"
+      "connection": "AzureWebJobsStorage",
+      "dataType": "binary"
     },
     {
       "type": "http",
