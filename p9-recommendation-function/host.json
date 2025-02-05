@@ -10,6 +10,11 @@
         "isEnabled": true,
         "maxTelemetryItemsPerSecond": 5
       }
+    },
+    "logLevel": {
+      "default": "Debug",
+      "Azure": "Debug",
+      "Function": "Debug"
     }
   }
 }
