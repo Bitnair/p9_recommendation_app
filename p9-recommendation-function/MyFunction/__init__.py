@@ -6,6 +6,7 @@ Returns predictions as a list of recommended item IDs for a given user ID.
 import logging
 import azure.functions as func
 from azure.storage.blob import BlobServiceClient
+print("BlobServiceClient successfully imported")
 
 import ssl
 import certifi
