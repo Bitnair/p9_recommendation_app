@@ -1,4 +1,4 @@
-name: Build and deploy Azure Function - p9-recommendation-function-b
+name: Build and deploy Azure Function - p9-recommendation-function
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 env:
-  AZURE_FUNCTIONAPP_PACKAGE_PATH: 'p9-recommendation-function-b'
+  AZURE_FUNCTIONAPP_PACKAGE_PATH: 'p9-recommendation-function'
   PYTHON_VERSION: '3.11'
 
 jobs:
