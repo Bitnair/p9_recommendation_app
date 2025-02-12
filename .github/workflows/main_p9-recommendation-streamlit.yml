@@ -21,22 +21,26 @@ jobs:
       - name: Install dependencies
         run: |
           cd streamlit-app
-          python -m venv venv
-          source venv/bin/activate
           pip install --upgrade pip
           pip install -r requirements.txt
 
       - name: Validate Streamlit App
         run: |
           cd streamlit-app
-          source venv/bin/activate
-          streamlit run streamlit_app.py --server.headless=true --server.port=8501 --server.address=127.0.0.1 &
-          sleep 10  # Wait for Streamlit to start
-          curl http://127.0.0.1:8501  # Check if Streamlit is responding
+          streamlit run streamlit_app.py --server.headless=true --server.address=0.0.0.0 --server.port=$PORT &
+          for i in {1..15}; do
+            if curl -s --head --request GET http://0.0.0.0:$PORT | grep "200 OK" > /dev/null; then
+              echo "Streamlit app is running"
+              break
+            fi
+            echo "Waiting for Streamlit app to start..."
+            sleep 2
+          done
 
       - name: Zip application
         run: |
-          zip -r app.zip streamlit-app
+          cd streamlit-app
+          zip -r ../app.zip ./*
 
       - name: Azure Login
         uses: azure/login@v1
@@ -45,4 +49,4 @@ jobs:
 
       - name: Deploy to Azure Web App
         run: |
-          az webapp deployment source config-zip --resource-group oc_p9 --name p9-recommendation-streamlit --src app.zip
+          az webapp deploy --resource-group oc_p9 --name p9-recommendation-streamlit --src-path app.zip
