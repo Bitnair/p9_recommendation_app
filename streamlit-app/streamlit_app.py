@@ -18,7 +18,7 @@ user_id = st.number_input("ID utilisateur", min_value=1, value=1, step=1)
 if st.button("Obtenir les recommandations"):
     # Call the Azure Function endpoint
     params = {'user': user_id}
-    response = requests.get(AZURE_FUNCTION_URL, params=params)
+    response = requests.get(AZURE_FUNCTION_URL, params=params, timeout=120)
 
     if response.status_code == 200:
         recommended_items = json.loads(response.text)
