@@ -27,9 +27,10 @@ jobs:
       - name: Validate Streamlit App
         run: |
           cd streamlit-app
+          export PORT=8501  # Set default port for GitHub workflow
           streamlit run streamlit_app.py --server.headless=true --server.address=0.0.0.0 --server.port=$PORT &
           for i in {1..15}; do
-            if curl -s --head --request GET http://0.0.0.0:$PORT | grep "200 OK" > /dev/null; then
+            if curl -s --head --request GET http://127.0.0.1:$PORT | grep "200 OK" > /dev/null; then
               echo "Streamlit app is running"
               break
             fi
@@ -49,4 +50,5 @@ jobs:
 
       - name: Deploy to Azure Web App
         run: |
+          az webapp config appsettings set --resource-group oc_p9 --name p9-recommendation-streamlit --settings PORT=8501
           az webapp deploy --resource-group oc_p9 --name p9-recommendation-streamlit --src-path app.zip
