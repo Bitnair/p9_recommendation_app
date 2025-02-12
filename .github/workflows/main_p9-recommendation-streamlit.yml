@@ -50,5 +50,6 @@ jobs:
 
       - name: Deploy to Azure Web App
         run: |
-          az webapp config appsettings set --resource-group oc_p9 --name p9-recommendation-streamlit --settings PORT=8501
+          az webapp config appsettings set --resource-group oc_p9 --name p9-recommendation-streamlit --settings WEBSITE_RUN_FROM_PACKAGE=1 PORT=8501
           az webapp deploy --resource-group oc_p9 --name p9-recommendation-streamlit --src-path app.zip
+          az webapp restart --resource-group oc_p9 --name p9-recommendation-streamlit
