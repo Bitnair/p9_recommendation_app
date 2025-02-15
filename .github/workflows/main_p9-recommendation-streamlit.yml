@@ -40,8 +40,8 @@ jobs:
 
       - name: Zip application
         run: |
-          cd streamlit-app
-          zip -r ../app.zip ./*
+          # From the repository root, include the folder in the zip
+          zip -r app.zip streamlit-app
 
       - name: Azure Login
         uses: azure/login@v1
