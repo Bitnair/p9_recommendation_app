@@ -23,7 +23,7 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v3
         with:
-          context: .
+          context: ./streamlit-app
           file: ./streamlit-app/Dockerfile
           platforms: linux/amd64  # target platform
           push: true
