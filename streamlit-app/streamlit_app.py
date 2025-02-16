@@ -21,21 +21,14 @@ if st.button("Obtenir les recommandations"):
     response = requests.get(AZURE_FUNCTION_URL, params=params, timeout=120)
 
     if response.status_code == 200:
-        recommended_items = json.loads(response.text)
-        st.write(f"Articles recommandés pour l'utilisateur {user_id}:")
-        for idx, item in enumerate(recommended_items, start=1):
-            st.write(f"{idx}. Article ID: {item}")
-    else:
-        st.write(f"Error: {response.text}")
+        try:
+            recommended_items = json.loads(response.text)
+            st.write(f"Articles recommandés pour l'utilisateur {user_id}:")
+            for idx, item in enumerate(recommended_items, start=1):
+                st.write(f"{idx}. Article ID: {item}")
+        except json.decoder.JSONDecodeError:
+            st.write("The response from the function was not a valid JSON. Raw response:")
+            st.write(response.text)
 
-if response.status_code == 200:
-    try:
-        recommended_items = json.loads(response.text)
-        st.write(f"Articles recommandés pour l'utilisateur {user_id}:")
-        for idx, item in enumerate(recommended_items, start=1):
-            st.write(f"{idx}. Article ID: {item}")
-    except json.decoder.JSONDecodeError:
-        st.write("The response from the function was not valid JSON. Raw response:")
-        st.write(response.text)
-else:
-    st.write(f"Error: {response.status_code} - {response.text}")
+    else:
+        st.write(f"Error: {response.status_code} - {response.text}")
