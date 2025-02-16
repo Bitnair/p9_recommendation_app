@@ -24,7 +24,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: .
-          file: ./Dockerfile
+          file: ./streamlit-app/Dockerfile
           platforms: linux/amd64  # target platform
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/p9-recommendation-streamlit:latest
