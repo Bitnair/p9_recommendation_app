@@ -23,11 +23,11 @@ if st.button("Obtenir les recommandations"):
     if response.status_code == 200:
         try:
             data = json.loads(response.text)
-            st.write(f"Articles recommandés pour l'utilisateur {user_id}:")
+            st.write(f"Articles ID recommandés pour cet utilisateur {user_id}:")
             # Get the recommendations list from the response object.
             recommended_items = data.get("recommendations", [])
             for idx, item in enumerate(recommended_items, start=1):
-                st.write(f"{idx}. Article ID: {item}")
+                st.write(f"{idx}. {item}")
         except json.decoder.JSONDecodeError:
             st.write("The response from the function was not a valid JSON. Raw response:")
             st.write(response.text)
