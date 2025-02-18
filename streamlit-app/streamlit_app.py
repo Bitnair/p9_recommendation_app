@@ -8,9 +8,9 @@ import json
 AZURE_FUNCTION_URL = "https://p9-recommendation-function.azurewebsites.net/api/MyFunction"
 # AZURE_FUNCTION_URL = "http://localhost:7071/api/MyFunction" # Local testing
 
-st.title("Système de Recommandation d'Articles")
+st.title("Recommandation d'articles")
 
-st.write("Veuillez entrer un ID d'utilisateur pour obtenir 5 recommandations d'articles personnalisées.")
+st.write("Entrez un ID d'utilisateur pour obtenir 5 recommandations d'articles personnalisées.")
 
 # Input for user_id
 user_id = st.number_input("ID utilisateur", min_value=1, value=1, step=1)
@@ -23,11 +23,11 @@ if st.button("Obtenir les recommandations"):
     if response.status_code == 200:
         try:
             data = json.loads(response.text)
-            st.write(f"Articles ID recommandés pour cet utilisateur {user_id}:")
+            st.write(f"ID d'articles recommandés pour cet utilisateur :")
             # Get the recommendations list from the response object.
             recommended_items = data.get("recommendations", [])
             for idx, item in enumerate(recommended_items, start=1):
-                st.write(f"{idx}. {item}")
+                st.write(f"#{idx} : {item}")
         except json.decoder.JSONDecodeError:
             st.write("The response from the function was not a valid JSON. Raw response:")
             st.write(response.text)
